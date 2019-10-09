@@ -11,7 +11,7 @@ CREATE TABLE products (
     price DECIMAL (10,2) NOT NULL,
     stock_quantity INTEGER(10) NOT NULL,
     primary key(item_id) 
-)
+);
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("jenga", "games", 10.98, 25),
 ("monopoly", "games",11.95,25),
@@ -22,8 +22,8 @@ VALUES ("jenga", "games", 10.98, 25),
 ("mittens", "outerwear", 11.00, 36),
 ("jacket", "outerwear", 25.00, 100),
 ("SPF 30 Natural Sunscreen", "Skin Care", 12.33, 10),
-("Aloe Vera Gel", "Skin Care", 12.95, 65);
-("Scientific Calculator", "Office Supplies", 17.98, 100 ) ,
+("Aloe Vera Gel", "Skin Care", 12.95, 65),
+("Scientific Calculator", "Office Supplies", 17.98, 100),
 ("Brother P-touch Label Maker", "Office Supplies", 34.00, 43);
 
 SELECT *FROM products;

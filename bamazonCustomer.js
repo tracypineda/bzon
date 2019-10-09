@@ -11,74 +11,104 @@ var connection = mysql.createConnection({
     // Your password
     password: "Saludesvida2019!",
     database: "bamazon_db"
- });
- connection.connect(function (err) {
+});
+connection.connect(function (err) {
     if (err) throw err;
     console.log(`Connected as id ${connection.threadId}`);
     showInventory();
- });
+});
 
- function showInventory () {
-     var query = "SELECT * FROM products";
-     connection.query(query, function(err, res) {
-         if (err) throw err;
-         console.table(res);
-promptCustomer();
+function showInventory() {
+    var query = "SELECT * FROM products";
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        promptCustomer();
     });
 
 }
 function promptCustomer() {
     inquirer.prompt([
         {
-          type: "input",
-          name: "choice",
-          message: "What is the ID of the item you would you like to purchase? [Quit with Q]",
-          validate: function(val) {
-            if (val.toLowerCase() === 'q') {
-                console.log(chalk.magenta.bold("\n\n Thank you for shopping at Bamazon !! \n"));
-                //Close Connection 
-                connection.end();
-                //exits the app 
-                process.exit();
+            type: "input",
+            name: "choice",
+            message: "What is the ID of the item you would you like to purchase? [Quit with Q]",
+            validate: function (val) {
+                if (val.toLowerCase() === 'q') {
+                    console.log(chalk.magenta.bold("\n\n Thank you for shopping at Bamazon !! \n"));
+                    //Close Connection 
+                    connection.end();
+                    //exits the app 
+                    process.exit();
+                }
+                else if (isNaN(val) || parseInt(val) <= 0 || val === '') {
+                    console.log(chalk.redBright("Please provide a valid item_id number \n"));
+                    return false;
+                }
+                else {
+                    return true;
+                }
             }
-            else if (isNaN(val) || parseInt(val) <= 0 || val === '' ) {
-                console.log(chalk.redBright("Please provide a valid item_id number \n"));
-                return false;
-            }
-            else {
-                return true;
-            }
-          }
         },
-{ 
-    type: "input",
-    name: "purchase_quantity",
-    message: "How many would you like to purchase? [Quit with Q]",
-    validate: function(val) {
-      if (val.toLowerCase() === 'q') {
-          console.log(chalk.magenta.bold("\n\n Thank you for shopping at Bamazon !! \n"));
-          //Close Connection 
-          connection.end();
-          //exits the app 
-          process.exit();
-      }
-      else if (isNaN(val) || parseInt(val) <= 0 || val === '' ) {
-          console.log(chalk.redBright("Please provide a valid quantity! \n"));
-          return false;
-      }
-      else {
-          return true;
-      }
-    }
-  },
-]).then(function (inquirerResponse) {
-    var query = connection.query('SELECT * FROM products WHERE item_id = ? ;', [inquirerResponse.choice], function (err, res) {
-        //throw error 
-        if (err) throw chalk.red.bold(err);
-        console.log(res);
-});
-});
+        {
+            type: "input",
+            name: "purchase_quantity",
+            message: "How many would you like to purchase? [Quit with Q]",
+            validate: function (val) {
+                if (val.toLowerCase() === 'q') {
+                    console.log(chalk.magenta.bold("\n\n Thank you for shopping at Bamazon !! \n"));
+                    //Close Connection 
+                    connection.end();
+                    //exits the app 
+                    process.exit();
+                }
+                else if (isNaN(val) || parseInt(val) <= 0 || val === '') {
+                    console.log(chalk.redBright("Please provide a valid quantity! \n"));
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+        },
+    ]).then(function (input) {
+        var item = input.item_id;
+        var quantity =  input.purchase_quantity;
+        console.log(quantity);
 
+        connection.query('SELECT * FROM products WHERE item_id = ? ;', [input.choice], function (err, res) {
+            //throw error 
+            if (err) throw chalk.red.bold(err);
+            console.log(res);
+            if (res.length === 0) {
+                console.log("Error: Invalid Item ID. Please select a valid item ID.");
+                showInventory();
+            } else {
+                var productData = res[0];
+
+                if (quantity <= productData.stock_quantity) {
+                    console.log("Congratulations, the product you requested is in stock! Placing order!");
+
+                    var updateQuery = ("UPDATE products SET stock_quantity =") + (productData.stock_quantity - quantity) + "WHERE item_id = " + item;
+
+                    connection.query(updateQuery, function (err, res) {
+                        if (err) throw err;
+
+                        console.log("Your order has been place! Your total is $" + productData.price * quantity);
+                        console.log("Thank you for shopping with us!");
+                        console.log("\n---------------------------------\n");
+
+                        connection.end();
+
+                    })
+                } else {
+                    console.log("Sorry, there is not enough product in stock, your order can't be placed.");
+                    console.log("Please modify the quantity.");
+                    console.log("\n-----------------------------------------------\n");
+                    showInventory();
+                }
+            }
+        })
+    })
 }
-
 
