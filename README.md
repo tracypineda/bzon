@@ -32,5 +32,5 @@ Link to [WORKING_APP]()
 - Javascript
 
 ### Contributers
-- Tracy Pineda
+- Portfolio[Tracy Pineda](https://tracypineda.github.io/Bootstrap-Portfolio/)
 
