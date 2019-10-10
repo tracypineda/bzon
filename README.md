@@ -1,9 +1,9 @@
-# bamazon!
+# bamazon
 
-## Welcome to Bamazon! This is an Amazon-like storefront built with MySQL and Node.js. 
+## Welcome to Bamazon! This is an Amazon-like storefront built with Javascript and Node.js. 
 
 Within the customer portal, you can view the inventory, choose an item you'd like to purchase
-along with the quantity, and voila! Transaction complete! However, if we do not have enough 
+along with the quantity, and the transaction complete. However, if we do not have enough 
 of the selected item in stock deeming us unable to fulfill your purchase, the transaction 
 will not go through.
 
@@ -24,7 +24,6 @@ Link to [WORKING_APP]()
   - However, if there is not enough of the product in stock, it will tell the user that there isn't enough of the product.
   - If the purchase goes through, it updates the stock quantity to reflect the purchase.
   - It will also update the product sales in the department table.
-    newline\
 
 # Built with:
 
