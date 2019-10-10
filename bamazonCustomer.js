@@ -72,24 +72,25 @@ function promptCustomer() {
             }
         },
     ]).then(function (input) {
-        var item = input.item_id;
-        var quantity =  input.purchase_quantity;
-        console.log(quantity);
+        var quantity = input.purchase_quantity;
+        // var item = res[0].item_id;
 
-        connection.query('SELECT * FROM products WHERE item_id = ? ;', [input.choice], function (err, res) {
+
+        connection.query("SELECT * FROM products WHERE item_id=? ;", [input.choice], function (err, res) {
             //throw error 
             if (err) throw chalk.red.bold(err);
-            console.log(res);
+
             if (res.length === 0) {
                 console.log("Error: Invalid Item ID. Please select a valid item ID.");
                 showInventory();
             } else {
                 var productData = res[0];
+                console.log(productData.item_id);
 
                 if (quantity <= productData.stock_quantity) {
                     console.log("Congratulations, the product you requested is in stock! Placing order!");
 
-                    var updateQuery = ("UPDATE products SET stock_quantity =") + (productData.stock_quantity - quantity) + "WHERE item_id = " + item;
+                    var updateQuery = ("UPDATE products SET stock_quantity= ") + (productData.stock_quantity - quantity) + " WHERE item_id= " + productData.item_id;
 
                     connection.query(updateQuery, function (err, res) {
                         if (err) throw err;
@@ -97,8 +98,8 @@ function promptCustomer() {
                         console.log("Your order has been place! Your total is $" + productData.price * quantity);
                         console.log("Thank you for shopping with us!");
                         console.log("\n---------------------------------\n");
-
-                        connection.end();
+//recursive loop
+                        showInventory();
 
                     })
                 } else {
