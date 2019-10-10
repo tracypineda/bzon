@@ -9,11 +9,11 @@ will not go through.
 
 Happy shopping!
 
-# Video Demo of Working APP
+## Video Demo of Working APP
 
 Link to [WORKING_APP]()
 
-# What the javascript does
+## What the javascript does
 
 1. `bamazonCustomer.js`
 - Prints products to the store in a table.
@@ -25,11 +25,11 @@ Link to [WORKING_APP]()
   - If the purchase goes through, it updates the stock quantity to reflect the purchase.
   - It will also update the product sales in the department table.
 
-# Built with:
+## Built with:
 
 - Node.js
 - Javascript
 
-# Contributers
+### Contributers
 - Tracy Pineda
 
