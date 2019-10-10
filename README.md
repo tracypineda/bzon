@@ -1,6 +1,6 @@
 # bamazon
 
-## Welcome to Bamazon! This is an Amazon-like storefront built with Javascript and Node.js. 
+## Welcome to Bamazon! This is an Amazon-like storefront built with Javascript, Node.js and My SQL.
 
 Within the customer portal, you can view the inventory, choose an item you'd like to purchase
 along with the quantity, and the transaction complete. However, if we do not have enough 
@@ -27,6 +27,7 @@ Link to [WORKING_APP]()
 
 ## Built with:
 
+- My SQL
 - Node.js
 - Javascript
 
