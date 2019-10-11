@@ -11,7 +11,7 @@ Happy shopping!
 
 ## Video Demo of Working APP
 
-Link to video [WORKING_APP](bamazonVideo.mp4)
+Link to video [BAMAZON VIDEO](bamazonVideo.mp4)
 
 ## What the javascript does
 
