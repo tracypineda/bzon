@@ -100,6 +100,7 @@ function promptCustomer() {
                         console.log("\n---------------------------------\n");
 //recursive loop
                         showInventory();
+                        console.log("Would you like to make another purchase?");
 
                     })
                 } else {

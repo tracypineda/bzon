@@ -11,7 +11,7 @@ Happy shopping!
 
 ## Video Demo of Working APP
 
-Link to [WORKING_APP]()
+Link to video [WORKING_APP](bamazonVideo.mp4)
 
 ## What the javascript does
 
@@ -32,5 +32,5 @@ Link to [WORKING_APP]()
 - Javascript
 
 ### Contributers
-- Portfolio[Tracy Pineda](https://tracypineda.github.io/Bootstrap-Portfolio/)
+- Portfolio Page [Tracy Pineda](https://tracypineda.github.io/Bootstrap-Portfolio/)
 
